@@ -1,0 +1,14 @@
+@import '../../common.scss';
+@import '~bootstrap/scss/_buttons.scss';
+
+.app-splash-screen {
+  position: relative;
+  width: 270px;
+  margin: 0 auto;
+  top: 50%;
+  transform: translate(0, -50%);
+
+  .app-buttons {
+    margin: 0 10px
+  }
+}
