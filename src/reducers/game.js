@@ -71,14 +71,11 @@ export default function update(state = initialState, action) {
       };
     }
     case GAME_SET_SCORE: {
-      let winner = {};
-      winner[action.payload] = state.score[action.payload] + 1;
-
+      state.score[action.payload]++;
       return {
         ...state,
         score: {
-          ...state.score,
-          ...winner
+          ...state.score
         },
         lastWiner: action.payload
       };

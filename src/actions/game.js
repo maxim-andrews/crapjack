@@ -33,7 +33,7 @@ export function drawPlayer() {
 
 export function drawDealer() {
   return (dispatch, getState) => {
-    let game = getState().game;
+    const game = getState().game;
     dispatch({
       type: GAME_SET_PROGRESS,
       payload: true
@@ -84,7 +84,7 @@ function processResponse(type, dispatch, res) {
       payload: { ...res, cards: null }
     });
 
-    let images = [];
+    const images = [];
 
     res.cards.forEach(card => {
       images.push(loadImage(card.images.svg));
@@ -112,7 +112,7 @@ function drawByOneCard(type, cards, dispatch, resolve) {
     return;
   }
 
-  let card = cards.shift();
+  const card = cards.shift();
   dispatch({
     type: type,
     payload: card
