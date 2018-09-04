@@ -9,8 +9,8 @@ const port = process.env.PORT || 9000;
 const app = new Koa();
 
 app.use(compress());
-app.use(serve(path.join(__dirname, '..', 'build')));
-app.use(rewrite('*', 'index.html'));
+app.use(rewrite('/(rules|game)', '/index.html'));
+app.use(serve(path.join(__dirname, '..', 'build')), { defer: true });
 
 app.listen(port);
 
