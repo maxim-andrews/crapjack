@@ -1,0 +1,12 @@
+@import '../../common.scss';
+@import '~bootstrap/scss/_buttons.scss';
+
+.rules-screen {
+  max-width: 500px;
+  position: relative;
+  margin: 0 auto;
+
+  .back-button {
+    margin: 20px 0;
+  }
+}

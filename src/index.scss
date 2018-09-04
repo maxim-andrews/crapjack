@@ -1,0 +1,23 @@
+@import 'common.scss';
+
+:global {
+  @import '~bootstrap/scss/_card.scss';
+  @import '~bootstrap/scss/utilities/_background.scss';
+  @import '~bootstrap/scss/utilities/_borders.scss';
+  @import '~bootstrap/scss/utilities/_clearfix.scss';
+  @import '~bootstrap/scss/utilities/_text.scss';
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+
+  > div {
+    height: 100%;
+  }
+}
