@@ -9,8 +9,8 @@ const GameButton = ({ inProgress, dealer, drawPlayer, drawDealer, score, lastWin
   const dealerDrawed = Array.isArray(dealer) && dealer.length === 3;
   return (<div className={styles['game-button-holder']}>
     <div className={styles['game-session-score']}>
-      {Object.keys(score).map((key, idx) => {
-        return <span key={idx}>{key.substr(0, 1).toUpperCase() + key.substr(1) + ': ' + score[key]}</span>;
+      {Object.keys(score).map(key => {
+        return <span key={key}>{key.substr(0, 1).toUpperCase() + key.substr(1) + ': ' + score[key]}</span>;
       })}
     </div>
     <button className={`${ styles.btn } ${ styles.btnOutlinePrimary }`} onClick={dealerDrawed ? drawPlayer:drawDealer} disabled={inProgress}>
