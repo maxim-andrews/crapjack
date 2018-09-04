@@ -8,7 +8,7 @@ import {
   } from '../constants';
 
 export function drawPlayer() {
-  return (dispatch, getState) => {
+  return dispatch => {
     dispatch({
       type: GAME_SET_PROGRESS,
       payload: true
@@ -72,13 +72,13 @@ function makeDraw(type, dispatch, game) {
   })
   .then(response => response.json())
   .then(processResponse.bind(null, type, dispatch))
-  .catch(e => {
+  .catch(() => {
     console.log('Check your Internet connection!');
   });
 }
 
 function processResponse(type, dispatch, res) {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     dispatch({
       type: GAME_SET_DECK,
       payload: { ...res, cards: null }
@@ -97,7 +97,7 @@ function processResponse(type, dispatch, res) {
 }
 
 export function loadImage(image) {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     var img = new Image();
     img.addEventListener('load', () =>  {
       resolve();

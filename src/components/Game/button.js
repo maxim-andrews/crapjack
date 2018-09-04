@@ -21,7 +21,7 @@ const GameButton = ({ inProgress, dealer, drawPlayer, drawDealer, score, lastWin
 };
 
 export default connect(
-  (state, ownProps) => ({
+  state => ({
     dealer: state.game.cards.dealer,
     inProgress: state.game.inProgress,
     lastWiner: state.game.lastWiner,
