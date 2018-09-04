@@ -71,11 +71,16 @@ export default function update(state = initialState, action) {
       };
     }
     case GAME_SET_SCORE: {
-      state.score[action.payload]++;
+      // cloning
+      const score = { ...state.score };
+      // mutating
+      score[action.payload]++;
+
       return {
         ...state,
         score: {
-          ...state.score
+          // duplicating
+          ...score
         },
         lastWiner: action.payload
       };
