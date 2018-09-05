@@ -41,11 +41,11 @@ export function drawDealer() {
 
     makeDraw(GAME_DRAW_DEALER, dispatch, game)
       .then(() => {
-        let latestGame = getState().game;
-        let pScore = scorePlayer(latestGame.cards.player);
-        let dScore = scorePlayer(latestGame.cards.dealer);
+        const latestGame = getState().game;
+        const pScore = scorePlayer(latestGame.cards.player);
+        const dScore = scorePlayer(latestGame.cards.dealer);
 
-        let isDraw = pScore === dScore || (pScore > 21 && dScore > 21);
+        const isDraw = pScore === dScore || (pScore > 21 && dScore > 21);
 
         dispatch({
           type: GAME_SET_SCORE,
