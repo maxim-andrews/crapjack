@@ -7,9 +7,9 @@ import {
     GAME_SET_SCORE
   } from '../constants';
 
-function gaSendEvent (category, action, label, value) {
+function gaSendEvent (category, action) {
   if (typeof ga === 'function') {
-    ga('send', 'event', category, action, label, value); // eslint-disable-line no-undef
+    ga('send', 'event', category, action, 'time', Date.now()); // eslint-disable-line no-undef
   }
 }
 
@@ -59,7 +59,7 @@ export function drawDealer () {
 
         dispatch({
           type: GAME_SET_SCORE,
-          payload: isDraw ? 'draw' : ((pScore > dScore && pScore < 22) || dScore > 21 ? 'player':'dealer')
+          payload: isDraw ? 'draw' : ((pScore > dScore && pScore < 22) || dScore > 21 ? 'player' : 'dealer')
         });
         gaSendEvent('Game', 'set-score');
 
