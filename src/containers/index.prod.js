@@ -8,6 +8,13 @@ import configureStore from '../store/configureStore';
 
 const { history, store } = configureStore();
 
+history.listen(location => {
+  if (typeof ga === 'function') {
+    ga('set', 'page', location.pathname); // eslint-disable-line no-undef
+    ga('send', 'pageview'); // eslint-disable-line no-undef
+  }
+});
+
 const render = Component => {
   ReactDom.render(
     <Provider store={store}>
