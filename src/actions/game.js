@@ -7,8 +7,15 @@ import {
     GAME_SET_SCORE
   } from '../constants';
 
-export function drawPlayer() {
+function gaSendEvent (category, action, label, value) {
+  if (typeof ga === 'function') {
+    ga('send', 'event', category, action, label, value); // eslint-disable-line no-undef
+  }
+}
+
+export function drawPlayer () {
   return dispatch => {
+    gaSendEvent('Game', 'new-game-start');
     dispatch({
       type: GAME_SET_PROGRESS,
       payload: true
@@ -23,6 +30,7 @@ export function drawPlayer() {
     });
     makeDraw(GAME_DRAW_PLAYER, dispatch)
       .then(() => {
+        gaSendEvent('Game', 'player-cards-revealed');
         dispatch({
           type: GAME_SET_PROGRESS,
           payload: false
@@ -31,8 +39,9 @@ export function drawPlayer() {
   }
 }
 
-export function drawDealer() {
+export function drawDealer () {
   return (dispatch, getState) => {
+    gaSendEvent('Game', 'dealer-reveal-request');
     const game = getState().game;
     dispatch({
       type: GAME_SET_PROGRESS,
@@ -41,6 +50,7 @@ export function drawDealer() {
 
     makeDraw(GAME_DRAW_DEALER, dispatch, game)
       .then(() => {
+        gaSendEvent('Game', 'dealer-cards-revealed');
         const latestGame = getState().game;
         const pScore = scorePlayer(latestGame.cards.player);
         const dScore = scorePlayer(latestGame.cards.dealer);
@@ -51,6 +61,7 @@ export function drawDealer() {
           type: GAME_SET_SCORE,
           payload: isDraw ? 'draw' : ((pScore > dScore && pScore < 22) || dScore > 21 ? 'player':'dealer')
         });
+        gaSendEvent('Game', 'set-score');
 
         dispatch({
           type: GAME_SET_PROGRESS,
@@ -60,8 +71,8 @@ export function drawDealer() {
   }
 }
 
-function makeDraw(type, dispatch, game) {
-  return fetch('https://deckofcardsapi.com/api/deck/' + (type === GAME_DRAW_PLAYER ? 'new':game.deck.deck_id) + '/draw/?count=3', {
+function makeDraw (type, dispatch, game) {
+  return fetch('https://deckofcardsapi.com/api/deck/' + (type === GAME_DRAW_PLAYER ? 'new' : game.deck.deck_id) + '/draw/?count=3', {
     method: 'GET',
     redirect: 'follow',
     mode: 'cors',
@@ -77,7 +88,7 @@ function makeDraw(type, dispatch, game) {
   });
 }
 
-function processResponse(type, dispatch, res) {
+function processResponse (type, dispatch, res) {
   return new Promise(resolve => {
     dispatch({
       type: GAME_SET_DECK,
@@ -96,7 +107,7 @@ function processResponse(type, dispatch, res) {
   });
 }
 
-export function loadImage(image) {
+export function loadImage (image) {
   return new Promise(resolve => {
     var img = new Image();
     img.addEventListener('load', () =>  {
@@ -106,7 +117,7 @@ export function loadImage(image) {
   });
 }
 
-function drawByOneCard(type, cards, dispatch, resolve) {
+function drawByOneCard (type, cards, dispatch, resolve) {
   if (!Array.isArray(cards) || cards.length === 0) {
     resolve();
     return;
@@ -121,7 +132,7 @@ function drawByOneCard(type, cards, dispatch, resolve) {
   setTimeout(drawByOneCard.bind(null, type, cards, dispatch, resolve), 1000);
 }
 
-export function scorePlayer(cards) {
+export function scorePlayer (cards) {
   let sum = 0;
   cards.forEach(card => {
     sum += scoreCard(card.value);
@@ -130,6 +141,6 @@ export function scorePlayer(cards) {
   return sum;
 }
 
-export function scoreCard(str) {
+export function scoreCard (str) {
   return str.match(/^\d+$/) ? parseInt(str, 10):10;
 }
