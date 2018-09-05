@@ -7,15 +7,15 @@ import {
     GAME_SET_SCORE
   } from '../constants';
 
-function gaSendEvent (category, action, label, value) {
+function gaSendEvent (category, action) {
   if (typeof ga === 'function') {
-    ga('send', 'event', category, action, label, value); // eslint-disable-line no-undef
+    ga('send', 'event', category, action, 'time', Date.now()); // eslint-disable-line no-undef
   }
 }
 
 export function drawPlayer () {
   return dispatch => {
-    gaSendEvent('Game', 'new-game-start', 'time', Date.now());
+    gaSendEvent('Game', 'new-game-start');
     dispatch({
       type: GAME_SET_PROGRESS,
       payload: true
@@ -30,7 +30,7 @@ export function drawPlayer () {
     });
     makeDraw(GAME_DRAW_PLAYER, dispatch)
       .then(() => {
-        gaSendEvent('Game', 'player-cards-revealed', 'time', Date.now());
+        gaSendEvent('Game', 'player-cards-revealed');
         dispatch({
           type: GAME_SET_PROGRESS,
           payload: false
@@ -41,7 +41,7 @@ export function drawPlayer () {
 
 export function drawDealer () {
   return (dispatch, getState) => {
-    gaSendEvent('Game', 'dealer-reveal-request', 'time', Date.now());
+    gaSendEvent('Game', 'dealer-reveal-request');
     const game = getState().game;
     dispatch({
       type: GAME_SET_PROGRESS,
@@ -50,7 +50,7 @@ export function drawDealer () {
 
     makeDraw(GAME_DRAW_DEALER, dispatch, game)
       .then(() => {
-        gaSendEvent('Game', 'dealer-cards-revealed', 'time', Date.now());
+        gaSendEvent('Game', 'dealer-cards-revealed');
         const latestGame = getState().game;
         const pScore = scorePlayer(latestGame.cards.player);
         const dScore = scorePlayer(latestGame.cards.dealer);
@@ -59,9 +59,9 @@ export function drawDealer () {
 
         dispatch({
           type: GAME_SET_SCORE,
-          payload: isDraw ? 'draw' : ((pScore > dScore && pScore < 22) || dScore > 21 ? 'player':'dealer')
+          payload: isDraw ? 'draw' : ((pScore > dScore && pScore < 22) || dScore > 21 ? 'player' : 'dealer')
         });
-        gaSendEvent('Game', 'set-score', 'time', Date.now());
+        gaSendEvent('Game', 'set-score');
 
         dispatch({
           type: GAME_SET_PROGRESS,
