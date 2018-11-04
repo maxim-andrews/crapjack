@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { drawPlayer } from '../../actions/game';
@@ -21,6 +22,10 @@ class Game extends React.Component {
     </div>);
   }
 }
+
+Game.propTypes = {
+  drawPlayer: PropTypes.func.isRequired
+};
 
 export default connect(
   null,

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { drawPlayer, drawDealer } from '../../actions/game';
@@ -18,6 +19,18 @@ const GameButton = ({ inProgress, dealer, drawPlayer, drawDealer, score, lastWin
     </button>
     <div className={styles['game-winner']}>{!inProgress && dealerDrawed && lastWiner ? lastWiner.substr(0, 1).toUpperCase() + lastWiner.substr(1) + (lastWiner !== 'draw' ? ' won!':''):''}</div>
   </div>);
+};
+
+GameButton.propTypes = {
+  inProgress: PropTypes.bool.isRequired,
+  dealer: PropTypes.array.isRequired,
+  drawDealer: PropTypes.func.isRequired,
+  drawPlayer: PropTypes.func.isRequired,
+  score: PropTypes.object.isRequired,
+  lastWiner: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.object.isRequired
+  ]),
 };
 
 export default connect(

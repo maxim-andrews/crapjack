@@ -1,11 +1,11 @@
 import {
-    GAME_CLEAR,
-    GAME_SET_DECK,
-    GAME_DRAW_PLAYER,
-    GAME_DRAW_DEALER,
-    GAME_SET_PROGRESS,
-    GAME_SET_SCORE
-  } from '../constants';
+  GAME_CLEAR,
+  GAME_SET_DECK,
+  GAME_DRAW_PLAYER,
+  GAME_DRAW_DEALER,
+  GAME_SET_PROGRESS,
+  GAME_SET_SCORE
+} from '../constants';
 
 function gaSendEvent (category, action) {
   if (typeof ga === 'function') {
@@ -36,7 +36,7 @@ export function drawPlayer () {
           payload: false
         });
       });
-  }
+  };
 }
 
 export function drawDealer () {
@@ -68,7 +68,7 @@ export function drawDealer () {
           payload: false
         });
       });
-  }
+  };
 }
 
 function makeDraw (type, dispatch, game) {
@@ -81,11 +81,11 @@ function makeDraw (type, dispatch, game) {
       'Accept': '*/*'
     })
   })
-  .then(response => response.json())
-  .then(processResponse.bind(null, type, dispatch))
-  .catch(() => {
-    console.log('Check your Internet connection!');
-  });
+    .then(response => response.json())
+    .then(processResponse.bind(null, type, dispatch))
+    .catch(() => {
+      console.log('Check your Internet connection!');
+    });
 }
 
 function processResponse (type, dispatch, res) {

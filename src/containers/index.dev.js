@@ -17,12 +17,15 @@ const render = Component => {
     </Provider>,
     document.getElementById('root')
   );
-}
+};
 
 if (module.hot) {
-  module.hot.accept('./rootContainer', () => { render(RootContainer) });
+  module.hot.accept('./rootContainer', () => {
+    const RootContainer = require('./rootContainer').default;
+    render(RootContainer);
+  });
 }
 
 export default function renderRoot() {
   return render(RootContainer);
-};
+}
