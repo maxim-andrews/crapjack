@@ -1,11 +1,11 @@
 import {
-    GAME_CLEAR,
-    GAME_SET_DECK,
-    GAME_DRAW_PLAYER,
-    GAME_DRAW_DEALER,
-    GAME_SET_PROGRESS,
-    GAME_SET_SCORE
-  } from '../constants';
+  GAME_CLEAR,
+  GAME_SET_DECK,
+  GAME_DRAW_PLAYER,
+  GAME_DRAW_DEALER,
+  GAME_SET_PROGRESS,
+  GAME_SET_SCORE
+} from '../constants';
 
 const initialState = {
   deck: {},
@@ -86,6 +86,7 @@ export default function update(state = initialState, action) {
       };
     }
     default: {
+      //
     }
   }
 

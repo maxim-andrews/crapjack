@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { push } from 'connected-react-router/immutable'
+import { push } from 'connected-react-router';
 
 import styles from './app.scss';
 
@@ -11,5 +12,8 @@ function App({ dispatch }) {
   </div>);
 }
 
+App.propTypes = {
+  dispatch: PropTypes.func.isRequired
+};
 
 export default connect()(App);

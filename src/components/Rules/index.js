@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { push } from 'connected-react-router/immutable'
+import { push } from 'connected-react-router';
 
 import styles from './rules.scss';
 
@@ -31,5 +32,9 @@ function Rules({ dispatch }) {
     </div>
   </div>);
 }
+
+Rules.propTypes = {
+  dispatch: PropTypes.func.isRequired
+};
 
 export default connect()(Rules);

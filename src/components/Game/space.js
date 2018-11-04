@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { scorePlayer } from '../../actions/game';
@@ -8,7 +9,13 @@ import styles from './game.scss';
 
 const SpaceName = ({ position, title, color }) => {
   return (<div className={`text-white card-${ position } bg-${ color }`}>{title} Hand</div>);
-}
+};
+
+SpaceName.propTypes = {
+  position: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired
+};
 
 const Score = ({ cards, title }) => {
   const shouldScore = cards.length > 0;
@@ -17,7 +24,12 @@ const Score = ({ cards, title }) => {
   return (<div className={styles['game-score'] + ' ' + styles['game-hide'] + (score > 0 ? ' ' + styles['game-show']:'')}>
     {title} score: {score}
   </div>);
-}
+};
+
+Score.propTypes = {
+  cards: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired
+};
 
 const CardBody = ({ type, cards, title }) => {
   const elements = [
@@ -33,7 +45,13 @@ const CardBody = ({ type, cards, title }) => {
   }
 
   return (<div className="card-body">{elements}</div>);
-}
+};
+
+CardBody.propTypes = {
+  cards: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired
+};
 
 const Space = ({ cards, title, type }) => {
   const color = type === 'dealer' ? 'primary' : 'warning';
@@ -47,6 +65,12 @@ const Space = ({ cards, title, type }) => {
   }
 
   return (<div className={`card text-center border-${ color }`}>{elements}</div>);
+};
+
+Space.propTypes = {
+  cards: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired
 };
 
 export default connect(

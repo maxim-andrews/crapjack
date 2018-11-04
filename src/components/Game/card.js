@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { scoreCard } from '../../actions/game';
@@ -12,13 +13,21 @@ const CardBody = ({ card }) => {
     <img src={cardBack} className={styles['game-card-back']} alt="" />
     <img src={card ? card['images']['svg'] : space} className={styles['game-card-front']} alt="" />
   </div>);
-}
+};
+
+CardBody.propTypes = {
+  card: PropTypes.object
+};
 
 const CardScore = ({ card }) => {
   return (<div className={styles['game-hide'] + (card ? ' ' + styles['game-show']:'')}>
     { card ? scoreCard(card.value) : 0 }
   </div>);
-}
+};
+
+CardScore.propTypes = {
+  card: PropTypes.object
+};
 
 const Card = ({ card, type }) => {
   const elements = [ <CardBody key='card' card={card} /> ];
@@ -30,7 +39,12 @@ const Card = ({ card, type }) => {
   }
 
   return (<div className={styles['game-card-holder']}>{elements}</div>);
-}
+};
+
+Card.propTypes = {
+  card: PropTypes.object,
+  type: PropTypes.string.isRequired
+};
 
 export default connect(
   (state, ownProps) => ({

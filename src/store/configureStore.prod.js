@@ -20,4 +20,4 @@ export default function configureStore(initialState) {
   const store = createStore(connectedRouterReducers, initialState, enhancer);
 
   return { history, store };
-};
+}

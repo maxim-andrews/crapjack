@@ -24,8 +24,8 @@ const render = Component => {
     </Provider>,
     document.getElementById('root')
   );
-}
+};
 
 export default function renderRoot() {
   return render(RootContainer);
-};
+}
