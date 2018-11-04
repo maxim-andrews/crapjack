@@ -16,7 +16,7 @@ You should have `node` installed.
 
 Run command to install dependencies:
 ```
-npm install
+npm i
 ```
 
 ### Development
@@ -34,5 +34,5 @@ To run tests type in the command line:
 ### Production
 To create production version run:
 ```
-npm build
+npm run build
 ```
