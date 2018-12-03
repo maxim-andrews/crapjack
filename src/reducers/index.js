@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
+import { connectRouter } from 'connected-react-router';
 
 import game from './game';
 
-const rootReducer = combineReducers({
+const rootReducer = history => combineReducers({
+  router: connectRouter(history),
   game,
 });
 
